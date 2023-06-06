@@ -1,22 +1,22 @@
 {% extends "base.html" %}
 
 {% block title %}
-Login! - Tracker
+Sign Up ! - Tracker
 {% endblock title %}
 
 {% block nav %}
-<li><a href="{% url 'signup' %}"> Sign Up </a></li>
+<li><a href="{% url 'login' %}"> Login </a></li>
 {% endblock nav %}
 
 
 {% block content %}
 <main>
     <div>
-        <h1> Login </h1>
+        <h1> Signup </h1>
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            <button> Login </button>
+            <button> Signup </button>
         </form>
     </div>
 </main>
