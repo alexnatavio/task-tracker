@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}
+Project Detail - Tracker
+{% endblock title %}
+
+{% block nav %}
+<li><a href="{% url 'login' %}"> Login </a></li>
+<li><a href="{% url 'logout' %}"> Logout </a></li>
+<li><a href="{% url 'list_projects' %}"> Project List </a></li>
+{{user.username}} is logged in
+{% endblock nav %}
+
+{% block content %}
+<main>
+    <div>
+
+        <h1> {{ project_object.name }} </h1>
+        <p> {{ project_object.description }} </p>
+        <h2> Tasks </h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th> Name </th>
+                    <th> Assignee </th>
+                    <th> Start date </th>
+                    <th> Due date </th>
+                    <th> Is completed </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tasks in project_object.tasks.all %}
+                <tr>
+                    <td> {{ tasks.name }} </td>
+                    <td> {{ tasks.assignee }} </td>
+                    <td> {{ tasks.start_date }} </td>
+                    <td> {{ tasks.due_date }}</td>
+                    <td> {{ tasks.is_completed|yesno }}</td>
+                </tr>
+            </tbody>
+        </table>
+        {% empty %}
+        <p> This project has no tasks </p>
+        {% endfor %}
+
+
+
+    </div>
+</main>
+{% endblock content %}

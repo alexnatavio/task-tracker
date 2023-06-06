@@ -14,7 +14,7 @@ Project List - Tracker
 <main>
     <div>
         <h1> My Projects </h1>
-        {% for projects in project_list %}
+
 
         <table>
             <thead>
@@ -24,10 +24,10 @@ Project List - Tracker
                 </tr>
             </thead>
             <tbody>
-
+                {% for projects in project_list %}
                 <tr>
-                    <td> {{ projects.name }} </td>
-                    <td> {{ projects.num_tasks }} </td>
+                    <td><a href="{% url 'show_project' projects.id %}"> {{ projects.name }} </a></td>
+                    <td> {{ projects.tasks.all|length }} </td>
                 </tr>
             </tbody>
         </table>
