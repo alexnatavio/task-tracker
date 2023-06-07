@@ -1,52 +1,63 @@
 {% extends "base.html" %}
 
 {% block title %}
-Project List - Tracker
+    Project List - Tracker
 {% endblock title %}
-
 {% block content %}
-<header>
-    <nav>
-        <ul>
-            {% if user.is_authenticated %}
-            <li><a href="{% url 'show_my_tasks' %}"> My tasks </a></li>
-            <li><a href="{% url 'list_projects' %}"> My projects </a></li>
-            <li><a href="{% url 'logout' %}"> Logout </a></li>
-            {% else %}
-            <li><a href="{% url 'login' %}"> Login </a></li>
-            <li><a href="{% url 'signup' %}"> Signup </a></li>
-            {% endif %}
-        </ul>
-    </nav>
-</header>
-
-<main>
-    <div>
-        <h1> My Projects </h1>
-        <div>
-            <p><a href="{% url 'create_project' %}"> Create New Project </a></p>
-        </div>
-        {% if project_list %}
-        <table>
-            <thead>
-                <tr>
-                    <th> Name </th>
-                    <th> Number of tasks </th>
-                </tr>
-            </thead>
-
-            <tbody>
-                {% for projects in project_list %}
-                <tr>
-                    <td><a href="{% url 'show_project' projects.id %}"> {{ projects.name }} </a></td>
-                    <td> {{ projects.tasks.all|length }} </td>
-                </tr>
-                {% endfor %}
+    <header>
+        <nav>
+            <ul>
+                {% if user.is_authenticated %}
+                    <li>
+                        <a href="{% url 'show_my_tasks' %}">My tasks</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'list_projects' %}">My projects</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'logout' %}">Logout</a>
+                    </li>
                 {% else %}
-                <p> You are not assigned to any projects </p>
+                    <li>
+                        <a href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'signup' %}">Signup</a>
+                    </li>
                 {% endif %}
-            </tbody>
-        </table>
-    </div>
-</main>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div>
+            <h1>My Projects</h1>
+            <div>
+                <p>
+                    <a href="{% url 'create_project' %}">Create New Project</a>
+                </p>
+            </div>
+            {% if project_list %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Number of tasks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for projects in project_list %}
+                            <tr>
+                                <td>
+                                    <a href="{% url 'show_project' projects.id %}">{{ projects.name }}</a>
+                                </td>
+                                <td>{{ projects.tasks.all|length }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <p>You are not assigned to any projects</p>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </main>
 {% endblock content %}
