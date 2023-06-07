@@ -21,6 +21,7 @@ Project Detail - Tracker
 
         <table>
             <thead>
+                {% if project_object.tasks.all %}
                 <tr>
                     <th> Name </th>
                     <th> Assignee </th>
@@ -29,6 +30,7 @@ Project Detail - Tracker
                     <th> Is completed </th>
                 </tr>
             </thead>
+
             <tbody>
                 {% for tasks in project_object.tasks.all %}
                 <tr>
@@ -38,14 +40,12 @@ Project Detail - Tracker
                     <td> {{ tasks.due_date }}</td>
                     <td> {{ tasks.is_completed|yesno }}</td>
                 </tr>
+                {% endfor %}
+                {% else %}
+                <p> This project has no tasks </p>
+                {% endif %}
             </tbody>
         </table>
-        {% empty %}
-        <p> This project has no tasks </p>
-        {% endfor %}
-
-
-
     </div>
 </main>
 {% endblock content %}
