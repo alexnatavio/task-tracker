@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}
+Create Task - Tracker
+{% endblock title %}
+
+{% block nav %}
+<li><a href="{% url 'login' %}"> Login </a></li>
+<li><a href="{% url 'logout' %}"> Logout </a></li>
+<li><a href="{% url 'list_projects' %}"> Project List </a></li>
+{{user.username}} is logged in
+{% endblock nav %}
+
+{% block content %}
+<main>
+    <div>
+        <h1> My Tasks </h1>
+        <table>
+            <thead>
+                {% if task_object.all %}
+                <tr>
+                    <th> Name </th>
+                    <th> Start date </th>
+                    <th> Due date </th>
+                    <th> Is completed </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for tasks in task_object.all %}
+                <tr>
+                    <td> {{ tasks.name }} </td>
+                    <td> {{ tasks.start_date }} </td>
+                    <td> {{ tasks.due_date }} </td>
+                    <td> {{ tasks.is_completed|yesno }} </td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <p> You have no tasks </p>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</main>
+{% endblock content %}
