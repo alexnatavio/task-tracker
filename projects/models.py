@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 class Project(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField()
-    owner = models.CharField(max_length=20, choices=User)
+    owner = models.CharField(max_length=50, choices=User)
 
     owner = models.ForeignKey(
         User,

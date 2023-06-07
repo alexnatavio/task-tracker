@@ -10,6 +10,8 @@ class Task(models.Model):
     start_date = models.DateTimeField()
     due_date = models.DateTimeField()
     is_completed = models.BooleanField(default=False)
+    assignee = models.CharField(max_length=50, choices=User)
+    project = models.CharField(max_length=50, choices=Project.name)
 
     project = models.ForeignKey(
         Project,
